@@ -1,13 +1,16 @@
-// Utils
-import { setState } from 'utils/setState';
-
 export const mainModel = {
   state: {
-    isGoogleMapsScriptLoading: false,
-    isGoogleMapsScriptReady: false,
+    activeKey: '0',
+    activeSubKey: '0',
+    tabs: [{ label: '#1', subTabs: [{ label: 'Sub-#1' }], load: { days: [] } }],
   },
   reducers: {
-    setMainState: setState,
+    changeTabLabel(state, { index, label } = {}) {
+      state.tabs[index].label = label;
+    },
+    changeSubTabLabel(state, { index, subIndex, label } = {}) {
+      state.tabs[index].subTabs[subIndex] = label;
+    },
   },
   effects: dispatch => ({}),
 };
