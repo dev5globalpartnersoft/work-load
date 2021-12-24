@@ -1,0 +1,29 @@
+before_script:
+  - apt-get update -qq
+  - apt-get install -qq git
+  # Setup SSH deploy keys
+  - "which ssh-agent || ( apt-get install -qq openssh-client )"
+  - eval $(ssh-agent -s)
+  - ssh-add <(echo "$SSH_PRIVATE_KEY")
+  - mkdir -p ~/.ssh
+  - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
+development_deploy:
+  type: deploy
+  environment:
+    name: deploy
+    url: $SSH_REMOTE_HOST
+  script:
+    # try to connect to server and run commands
+    - ssh $SSH_REMOTE_HOST -p $SSH_REMOTE_PORT "cd /home/node/af-fe && git checkout dev && git pull && sh production-restart.sh && exit"
+  only:
+    - dev
+production_deploy:
+  type: deploy
+  environment:
+    name: deploy
+    url: $SSH_REMOTE_HOST
+  script:
+    # try to connect to server and run commands
+    - ssh $SSH_REMOTE_HOST -p $SSH_REMOTE_PORT "cd /home/node/af-fe && git checkout dev && git pull && sh production-restart.sh && exit"
+  only:
+    - master
