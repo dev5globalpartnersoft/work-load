@@ -2,7 +2,10 @@ import styled from 'styled-components';
 import { Tabs, TabPane } from 'ui/Tabs';
 import { InputOutlined } from 'ui/inputs/InputOutlined';
 
-export const StyledTabs = styled(Tabs)``;
+export const StyledTabs = styled(Tabs)`
+  max-width: 800px;
+  padding-bottom: 40px;
+`;
 
 export const StyledTabPane = styled(TabPane)``;
 

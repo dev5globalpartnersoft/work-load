@@ -43,22 +43,22 @@ export const DaysTabs = ({
   return (
     <Wrap {...props}>
       {options.map((opt = {}, index) => {
-        const { label = '', value } = opt;
+        const { label = '', value: optValue } = opt;
 
-        const isDisabled = disabledOptions.includes(value);
-        const isActive = value.includes(value);
+        const isDisabled = disabledOptions.includes(optValue);
+        const isActive = value.includes(optValue);
 
-        const handleClick = e => {
+        const handleClick = () => {
           if (isDisabled) {
             return;
           }
 
           if (isActive) {
-            onDeselect(value, index);
-            onChange(value, index);
+            onDeselect(optValue, index);
+            onChange(optValue, index);
           } else {
-            onSelect(value, index);
-            onChange(value, index);
+            onSelect(optValue, index);
+            onChange(optValue, index);
           }
         };
 

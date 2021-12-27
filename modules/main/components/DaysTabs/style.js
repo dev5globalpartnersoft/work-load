@@ -7,6 +7,8 @@ export const TabWrap = styled.div`
   border-radius: 50%;
   border: 1px solid #ddd;
   color: #000;
+  cursor: pointer;
+  user-select: none;
   ${({ $active }) => css`
     ${$active &&
     css`
@@ -14,9 +16,20 @@ export const TabWrap = styled.div`
       color: #fff;
     `};
   `}};
+  
+  ${({ $disabled }) => css`
+    ${$disabled &&
+    css`
+      background-color: #ddd;
+      cursor: default;
+    `};
+  `};
+
+  :not(:first-child) {
+    margin-left: 5px;
+  }
 `;
 
 export const Wrap = styled.div`
   display: flex;
-  justify-content: space-between;
 `;
