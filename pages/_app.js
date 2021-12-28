@@ -38,7 +38,7 @@ export default function App({ Component, pageProps = {} }) {
   return (
     <>
       <Head>
-        <title>Allergy Friendly</title>
+        <title>Work Load</title>
       </Head>
       <Provider>
         <NextIntlProvider

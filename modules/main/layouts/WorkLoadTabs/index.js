@@ -4,7 +4,7 @@ import { StyledTabs, StyledTabPane, SubTabs, SubTabPane, StyledInput } from './s
 // Components
 import { DaysTabs } from '../../components/DaysTabs';
 import { DraggablePeriods } from '../../components/DraggablePeriods';
-import { AddTabButton } from '../../components/AddTabButton';
+import { DaysChart } from '../../components/DaysChart';
 
 // Utils
 import { store } from 'core';
@@ -12,7 +12,16 @@ import { store } from 'core';
 export const WorkLoadTabs = props => {
   const [
     { tabs, activeKey, activeSubKey },
-    { setState, changeTabLabel, toggleSubTabDay, addTab, addSubTab, setSubTabPeriod },
+    {
+      setState,
+      changeTabLabel,
+      toggleSubTabDay,
+      addTab,
+      removeTab,
+      addSubTab,
+      removeSubTab,
+      setSubTabPeriod,
+    },
   ] = store.useModel('main');
 
   const handleMainTabsChange = activeKey => {
@@ -23,27 +32,42 @@ export const WorkLoadTabs = props => {
     setState({ activeSubKey });
   };
 
-  const handleTabsAddClick = () => addTab();
+  const handleTabsEdit = (v, action) => {
+    if (action === 'add') {
+      addTab();
+    }
+    if (action === 'remove') {
+      removeTab({ index: v });
+    }
+  };
 
   const createMainTabNameChangeHandler = index => e => {
-    const label = e.target.value || '-';
+    const label = e.target.value || '';
     changeTabLabel({ index, label });
   };
 
   return (
     <StyledTabs
       activeKey={activeKey}
+      type="editable-card"
       onChange={handleMainTabsChange}
-      tabBarExtraContent={<AddTabButton onClick={handleTabsAddClick}>+Add</AddTabButton>}
+      onEdit={handleTabsEdit}
       {...props}
     >
       {tabs.map((tab = {}, index) => {
         const { label = '', subTabs = [], allDays = [] } = tab;
 
-        const handleSubTabsAddClick = () => addSubTab({ index });
+        const handleSubTabsEdit = (v, action) => {
+          if (action === 'add') {
+            addSubTab({ index });
+          }
+          if (action === 'remove') {
+            removeSubTab({ index, subIndex: v });
+          }
+        };
 
         return (
-          <StyledTabPane tab={label} key={index}>
+          <StyledTabPane tab={label} key={index} closable={tabs.length > 1}>
             <StyledInput
               title="Tab Name"
               value={label}
@@ -53,9 +77,8 @@ export const WorkLoadTabs = props => {
             <SubTabs
               activeKey={activeSubKey}
               onChange={handleSubTabsChange}
-              tabBarExtraContent={
-                <AddTabButton onClick={handleSubTabsAddClick}>+Add</AddTabButton>
-              }
+              onEdit={handleSubTabsEdit}
+              type="editable-card"
             >
               {subTabs.map((subTab = {}, subIndex) => {
                 const { label = '', days = [], periods = [] } = subTab;
@@ -71,7 +94,12 @@ export const WorkLoadTabs = props => {
                 const disabledDays = allDays.filter(d => !days.includes(d));
 
                 return (
-                  <SubTabPane tab={label} key={subIndex}>
+                  <SubTabPane
+                    tab={label}
+                    key={subIndex}
+                    type="editable-card"
+                    closable={subTabs.length > 1}
+                  >
                     <DaysTabs
                       disabledOptions={disabledDays}
                       value={days}
@@ -82,6 +110,9 @@ export const WorkLoadTabs = props => {
                 );
               })}
             </SubTabs>
+            <br />
+
+            <DaysChart />
           </StyledTabPane>
         );
       })}

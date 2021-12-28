@@ -1,3 +1,6 @@
+// Utils
+import { validatePeriod } from './utils/validatePeriod';
+
 export const defSubTab = {
   label: 'SubTab',
   periods: [
@@ -49,73 +52,57 @@ export const mainModel = {
       state.tabs.push({ ...defTab, label: `${label}${length}` });
       state.activeKey = String(length);
     },
+    removeTab(state, { index }) {
+      state.tabs.splice(index, 1);
+      if (state.activeKey === String(index)) {
+        state.activeKey = '0';
+      }
+    },
     addSubTab(state, { index }) {
       const { label = '' } = defSubTab;
       const { length } = state.tabs[index].subTabs;
       state.tabs[index].subTabs.push({ ...defSubTab, label: `${label}${length}` });
       state.activeSubKey = String(length);
     },
+    removeSubTab(state, { index, subIndex }) {
+      state.tabs[index].subTabs.splice(subIndex, 1);
+      if (state.activeSubKey === String(subIndex)) {
+        state.activeSubKey = '0';
+      }
+    },
     setSubTabPeriod(state, { period, index, subIndex, periodIndex }) {
       const periods = state.tabs[index].subTabs[subIndex].periods;
       const { length } = periods;
 
-      const { start = 0, end = 0, employees = 1 } = period;
+      const periodReplace = validatePeriod(period, periodIndex, length);
 
-      const periodTime = Math.abs(end - start);
+      const periodsReplace = [...state.tabs[index].subTabs[subIndex].periods];
+      periodsReplace.splice(periodIndex, 1, periodReplace);
 
-      const periodReplace = { ...period };
-
-      if (periodTime > 12) {
-        if (periodIndex === 0) {
-          periodReplace.start = 0;
-          periodReplace.end = 12;
-        } else {
-          if (periodIndex === length - 1) {
-            periodReplace.start = 12;
-            periodReplace.end = 24;
-          } else {
-            periodReplace.end = start + 12;
+      state.tabs[index].subTabs[subIndex].periods = periodsReplace.reduce(
+        (accum, current, i) => {
+          const pre = accum[i - 1];
+          if (!pre) {
+            return accum;
           }
-        }
-      }
 
-      if (periodTime < 4) {
-        if (periodIndex === 0) {
-          periodReplace.start = 0;
-          periodReplace.end = 4;
-        } else {
-          if (periodIndex === length - 1) {
-            periodReplace.start = 20;
-            periodReplace.end = 24;
-          } else {
-            periodReplace.end = start + 4;
-          }
-        }
-      }
-      const {
-        start: replaceStart = 0,
-        end: replaceEnd = 0,
-        employees: replaceEmployees = 1,
-      } = periodReplace;
-      const currentPeriod = periods[periodIndex];
+          const { end: preEnd = 0 } = pre;
+          const { end: currentEnd = 0, employees } = current;
 
-      const {
-        start: currentStart = 0,
-        end: currentEnd = 0,
-        employees: currentEmployees = 1,
-      } = currentPeriod;
-      const replaceTime = Math.abs(replaceEnd - replaceStart);
-      const currentTime = Math.abs(currentEnd - currentStart);
+          accum[i] = validatePeriod(
+            {
+              start: preEnd,
+              end: currentEnd,
+              employees,
+            },
+            i,
+            length
+          );
 
-      if (replaceTime > currentTime) {
-
-      } else {
-        if (replaceTime < currentTime) {
-
-        }
-      }
-
-      state.tabs[index].subTabs[subIndex].periods.splice(periodIndex, 1, periodReplace);
+          return accum;
+        },
+        [periodsReplace[0]]
+      );
     },
   },
 

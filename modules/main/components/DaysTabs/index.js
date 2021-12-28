@@ -1,8 +1,8 @@
 import { Wrap, TabWrap } from './style';
 
-const defOptions = [
+export const defOptions = [
   {
-    label: 'Sat',
+    label: 'Sun',
     value: 0,
   },
   {
