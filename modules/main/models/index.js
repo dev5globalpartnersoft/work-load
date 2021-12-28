@@ -66,10 +66,15 @@ export const mainModel = {
       state.activeSubKey = String(length);
     },
     removeSubTab(state, { index, subIndex }) {
-      state.tabs[index].subTabs.splice(subIndex, 1);
+      const [removedTab = {}] = state.tabs[index].subTabs.splice(subIndex, 1) || [];
 
       const keyReplace = state.tabs[index].subTabs.length - 1;
       state.activeSubKey = keyReplace >= 0 ? String(keyReplace) : '0';
+
+      const { days = [] } = removedTab;
+      state.tabs[index].allDays = state.tabs[index].allDays.filter(
+        d => !days.includes(d)
+      );
     },
     setSubTabPeriod(state, { period, index, subIndex, periodIndex }) {
       const periods = state.tabs[index].subTabs[subIndex].periods;
