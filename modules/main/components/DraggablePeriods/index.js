@@ -43,12 +43,9 @@ export const DraggablePeriods = ({ value = [], onChange = () => {}, ...props }) 
   useEffect(() => {
     if (throttledDragShiftState) {
       const { length } = value;
-      const { pageX: beforePageX } = dragShiftState;
       const { cursorX = 0, pageX = 0, index } = throttledDragShiftState;
       const v = value[index] || {};
       const { start = 0, end = 0 } = v;
-
-      console.log(beforePageX, pageX);
 
       if (length - 1 === index) {
         if (pageX > cursorX) {
@@ -63,7 +60,7 @@ export const DraggablePeriods = ({ value = [], onChange = () => {}, ...props }) 
         }
       }
     }
-  }, [dragShiftState, throttledDragShiftState]);
+  }, [throttledDragShiftState]);
 
   return (
     <Wrap>
