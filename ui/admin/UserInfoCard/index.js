@@ -2,7 +2,7 @@
 import { Wrap, P } from './style';
 
 // Hooks
-import { useAuthData } from 'api/auth/useAuthData';
+import { useAuthData } from 'someApi/auth/useAuthData';
 
 export const UserInfoCard = ({ ...props }) => {
   const { role = '', userData = {}, email = '' } = useAuthData();

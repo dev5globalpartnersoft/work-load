@@ -1,5 +1,8 @@
 import { useMutation } from 'react-query';
-import { apiResetPassword, QUERY_KEY_RESET_PASSWORD } from 'api/auth/apiResetPassword';
+import {
+  apiResetPassword,
+  QUERY_KEY_RESET_PASSWORD,
+} from 'someApi/auth/apiResetPassword';
 
 export const useResetPassword = (options = {}) => {
   return useMutation({

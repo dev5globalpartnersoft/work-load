@@ -16,7 +16,7 @@ import { PasswordInput } from '../../components/PasswordInput';
 // Hooks
 import { useTranslations } from 'languages';
 import { FormProvider, useForm } from 'react-hook-form';
-import { useSignUp } from 'api/auth/useSignUp';
+import { useSignUp } from 'someApi/auth/useSignUp';
 import { useNotification } from 'ui/Notification/useNotification';
 import { useRouter } from 'core/useRouter';
 

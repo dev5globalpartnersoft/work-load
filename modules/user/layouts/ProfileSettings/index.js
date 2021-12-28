@@ -15,8 +15,8 @@ import { FormProvider, useForm } from 'react-hook-form';
 // Hooks
 import { useRouter } from 'core/useRouter';
 import { useTranslations } from 'languages';
-import { useProfileSettings } from 'api/user/useProfileSettings';
-import { useAuthData } from 'api/auth/useAuthData';
+import { useProfileSettings } from 'someApi/user/useProfileSettings';
+import { useAuthData } from 'someApi/auth/useAuthData';
 import { useNotification } from 'ui/Notification/useNotification';
 
 export const ProfileSettingsPage = props => {

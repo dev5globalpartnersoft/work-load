@@ -10,7 +10,7 @@ import { SubmitButton } from 'modules/auth/layouts/ResetPasswordPage/components/
 
 // Hooks
 import { useTranslations } from 'languages';
-import { useForgotPasswordEmail } from 'api/auth/useForgotPasswordEmail';
+import { useForgotPasswordEmail } from 'someApi/auth/useForgotPasswordEmail';
 import { useNotification } from 'ui/Notification/useNotification';
 
 export const ForgotPasswordPage = () => {

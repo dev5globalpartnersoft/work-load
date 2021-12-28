@@ -2,7 +2,7 @@ import React from 'react';
 import { useRouter } from 'next/router';
 
 // Hooks
-import { useAuthData } from 'api/auth/useAuthData';
+import { useAuthData } from 'someApi/auth/useAuthData';
 
 export const withAuth = (AuthComponent, accessRole) => {
   const CenteredMessage = ({ message }) => (

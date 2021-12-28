@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 import { useQuery } from 'react-query';
-import { apiGetAuthData, QUERY_KEY_AUTH_DATA } from 'api/auth/apiGetAuthData';
+import { apiGetAuthData, QUERY_KEY_AUTH_DATA } from 'someApi/auth/apiGetAuthData';
 
 export const useAuthData = (params = {}, options = {}) => {
   const queryData = useQuery({

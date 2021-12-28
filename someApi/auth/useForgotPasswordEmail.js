@@ -2,7 +2,7 @@ import { useMutation } from 'react-query';
 import {
   apiForgotPasswordEmail,
   QUERY_KEY_FORGOT_PASSWORD_EMAIL,
-} from 'api/auth/apiForgotPasswordEmail';
+} from 'someApi/auth/apiForgotPasswordEmail';
 
 export const useForgotPasswordEmail = (options = {}) => {
   return useMutation({

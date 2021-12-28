@@ -17,8 +17,8 @@ import { useNotification } from 'ui/Notification/useNotification';
 import { useRouter } from 'core/useRouter';
 import { FormProvider, useForm } from 'react-hook-form';
 import { useTranslations } from 'languages';
-import { useSignIn } from 'api/auth/useSignIn';
-import { useAuthData } from 'api/auth/useAuthData';
+import { useSignIn } from 'someApi/auth/useSignIn';
+import { useAuthData } from 'someApi/auth/useAuthData';
 
 export const SignInPage = () => {
   const [error, setError] = useState();

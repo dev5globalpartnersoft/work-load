@@ -17,8 +17,8 @@ import { FormProvider, useForm } from 'react-hook-form';
 import { useTranslations } from 'languages';
 import { useRouter } from 'core/useRouter';
 import { useNotification } from 'ui/Notification/useNotification';
-import { useForgotPasswordVerify } from 'api/auth/useForgotPasswordVerify';
-import { useResetPassword } from 'api/auth/useResetPassword';
+import { useForgotPasswordVerify } from 'someApi/auth/useForgotPasswordVerify';
+import { useResetPassword } from 'someApi/auth/useResetPassword';
 
 export const ResetPasswordPage = () => {
   const [currentPassword, setCurrentPassword] = useState();

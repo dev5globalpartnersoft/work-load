@@ -1,4 +1,4 @@
-import { QUERY_KEY_AUTH } from 'api/auth/index';
+import { QUERY_KEY_AUTH } from 'someApi/auth/index';
 import { restRequest } from 'plugins/request';
 
 export const QUERY_KEY_VERIFY_EMAIL = `${QUERY_KEY_AUTH}/verify-email`;

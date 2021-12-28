@@ -3,7 +3,7 @@ import { useMemo, useCallback } from 'react';
 // Hooks
 import { useLoadAnchor } from 'utils/hooks/useLoadAnchor';
 import { useNotification } from 'ui/Notification/useNotification';
-import { useAuthData } from 'api/auth/useAuthData';
+import { useAuthData } from 'someApi/auth/useAuthData';
 
 // Api
 import {
@@ -11,7 +11,7 @@ import {
   useCreateAction,
   useEditAction,
   useDeleteAction,
-} from 'api/admin/crudHooks';
+} from 'someApi/admin/crudHooks';
 
 // Utils
 import { decorateObjMethods } from 'utils/decorateFn/decorateObjMethods';

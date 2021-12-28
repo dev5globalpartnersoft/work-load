@@ -8,7 +8,7 @@ import isPrimitive from 'is-primitive';
 
 // Hooks
 import { useController } from 'react-hook-form';
-import { useGetAllRecords } from 'api/admin/crudHooks';
+import { useGetAllRecords } from 'someApi/admin/crudHooks';
 import { useOptionKeys } from './utils/useOptionKeys';
 import { useDataArr } from './utils/useDataArr';
 import { useOptions } from './utils/useOptions';

@@ -4,13 +4,13 @@ import React, { useMemo, useEffect, useState, useCallback } from 'react';
 import { Wrap, StyledUpload } from './style';
 
 // Hooks
-import { useAuthData } from 'api/auth/useAuthData';
+import { useAuthData } from 'someApi/auth/useAuthData';
 import { useController } from 'react-hook-form';
 
 // Utils
 import isPlainObject from 'is-plain-obj';
-import { useCreateAction, useDeleteAction } from 'api/admin/crudHooks';
-import { getImageFile } from 'api/utils/getImageFile';
+import { useCreateAction, useDeleteAction } from 'someApi/admin/crudHooks';
+import { getImageFile } from 'someApi/utils/getImageFile';
 
 export const ImagesUpload = props => {
   const {

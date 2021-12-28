@@ -6,7 +6,7 @@ import { Wrap, Title, ButtonsWrap, Button } from './style';
 // Hooks
 import { useTranslations } from 'languages';
 import { useRouter } from 'core/useRouter';
-import { useVerifyEmail } from 'api/auth/useVerifyEmail';
+import { useVerifyEmail } from 'someApi/auth/useVerifyEmail';
 
 export const VerifyEmailPage = () => {
   const t = useTranslations();

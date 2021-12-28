@@ -1,5 +1,5 @@
 import { useMutation } from 'react-query';
-import { apiSignIn, QUERY_KEY_SIGN_IN } from 'api/auth/apiSignIn';
+import { apiSignIn, QUERY_KEY_SIGN_IN } from 'someApi/auth/apiSignIn';
 
 export const useSignIn = (options = {}) => {
   return useMutation({

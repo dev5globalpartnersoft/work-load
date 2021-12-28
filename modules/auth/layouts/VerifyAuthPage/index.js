@@ -5,7 +5,7 @@ import { useTranslations } from 'languages';
 import { useRouter } from 'core/useRouter';
 
 // Api
-import { apiLogOut } from 'api/auth/apiLogOut';
+import { apiLogOut } from 'someApi/auth/apiLogOut';
 
 // Styles
 import { Spin, Wrap, Result, Text } from './style';
