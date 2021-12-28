@@ -12,7 +12,7 @@ export const DraggablePeriods = ({ value = [], onChange = () => {}, ...props }) 
   const [dragShiftState, setDragShiftState] = useState();
 
   const throttledDragShiftState = useThrottle(dragShiftState, {
-    wait: 100,
+    wait: 200,
     leading: false,
   });
 
@@ -26,8 +26,8 @@ export const DraggablePeriods = ({ value = [], onChange = () => {}, ...props }) 
       }
 
       function handleMouseUp() {
-        document.removeEventListener('mousemove', handleMouseMove);
         setDragState(undefined);
+        document.removeEventListener('mousemove', handleMouseMove);
       }
 
       document.addEventListener('mousemove', handleMouseMove);
@@ -73,7 +73,7 @@ export const DraggablePeriods = ({ value = [], onChange = () => {}, ...props }) 
 
         const handleMouseDown = e => {
           e.stopPropagation();
-          if (typeof dragState?.index !== 'undefined') {
+          if (dragState) {
             return;
           }
 
