@@ -14,15 +14,18 @@ export const DraggablePeriods = ({ value = [], onChange = () => {}, ...props }) 
   const throttledDragShiftState = useThrottle(dragShiftState, {
     wait: 200,
     leading: false,
+    trailing: false,
   });
 
   useEffect(() => {
     if (dragState) {
-      const { cursorX = 0, index } = dragState;
+      const { index } = dragState;
+      let prevPageX = 0;
 
       function handleMouseMove(e) {
         const { pageX = 0 } = e;
-        setDragShiftState({ cursorX, pageX, index });
+        setDragShiftState({ prevPageX, pageX, index });
+        prevPageX = pageX;
       }
 
       function handleMouseUp() {
@@ -43,17 +46,19 @@ export const DraggablePeriods = ({ value = [], onChange = () => {}, ...props }) 
   useEffect(() => {
     if (throttledDragShiftState) {
       const { length } = value;
-      const { cursorX = 0, pageX = 0, index } = throttledDragShiftState;
+      const { prevPageX = 0, pageX = 0, index } = throttledDragShiftState;
       const v = value[index] || {};
       const { start = 0, end = 0 } = v;
 
+      console.log('prev page x', prevPageX, pageX);
+
       if (length - 1 === index) {
-        if (pageX > cursorX) {
+        if (pageX > prevPageX) {
           onChange({ ...v, start: start + 1 }, index);
         }
         onChange({ ...v, start: start - 1 }, index);
       } else {
-        if (pageX > cursorX) {
+        if (pageX > prevPageX) {
           onChange({ ...v, end: end + 1 }, index);
         } else {
           onChange({ ...v, end: end - 1 }, index);
@@ -77,8 +82,7 @@ export const DraggablePeriods = ({ value = [], onChange = () => {}, ...props }) 
             return;
           }
 
-          const cursorX = e.pageX;
-          setDragState({ cursorX, index });
+          setDragState({ index });
         };
 
         const handleEmployeesPlusClick = e => {
