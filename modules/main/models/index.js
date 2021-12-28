@@ -55,7 +55,8 @@ export const mainModel = {
     removeTab(state, { index }) {
       state.tabs.splice(index, 1);
       if (state.activeKey === String(index)) {
-        state.activeKey = '0';
+        const keyReplace = index - 1;
+        state.activeKey = keyReplace >= 0 ? String(keyReplace) : '0';
       }
     },
     addSubTab(state, { index }) {
@@ -67,7 +68,8 @@ export const mainModel = {
     removeSubTab(state, { index, subIndex }) {
       state.tabs[index].subTabs.splice(subIndex, 1);
       if (state.activeSubKey === String(subIndex)) {
-        state.activeSubKey = '0';
+        const keyReplace = subIndex - 1;
+        state.activeSubKey = keyReplace >= 0 ? String(keyReplace) : '0';
       }
     },
     setSubTabPeriod(state, { period, index, subIndex, periodIndex }) {
