@@ -17,6 +17,15 @@ import { store } from 'core';
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
 export const options = {
+  scales: {
+    y: {
+      suggestedMin: 4,
+      suggestedMax: 4,
+      ticks: {
+        precision: 0,
+      },
+    },
+  },
   responsive: true,
   plugins: {
     legend: {
@@ -74,6 +83,7 @@ export const DaysChart = () => {
     labels,
     datasets: [
       {
+        yAxisID: 'y',
         label: 'Employees',
         data: days,
         backgroundColor: 'rgb(0,0,0)',
